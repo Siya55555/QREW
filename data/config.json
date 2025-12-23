@@ -1,0 +1,18 @@
+{
+  "exclusiveEnabled": true,
+  "passwordHash": "$2b$10$sOQ3iDamYdpzHfo7wV6UFeM6MqOnjVluB/HQV0WcsvYOiOmRZp9sW",
+  "exclusiveProducts": [
+    {
+      "id": "EX-01",
+      "title": "EX-01 • Preorder",
+      "desc": "Member-only design • Limited",
+      "priceCents": 2500
+    },
+    {
+      "id": "EX-02",
+      "title": "EX-02 • Preorder",
+      "desc": "Prototype bundle",
+      "priceCents": 4500
+    }
+  ]
+}

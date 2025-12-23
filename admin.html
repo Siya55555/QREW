@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QREW Admin</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;background:#0b0b0c;color:#cfcfcf;padding:20px}
+    label{display:block;margin-top:12px}
+    input, textarea{width:100%;padding:8px;margin-top:6px;background:#0f0f10;border:1px solid #222;color:#cfcfcf}
+    button{margin-top:10px;padding:8px 10px}
+    .small{max-width:480px}
+  </style>
+</head>
+<body>
+  <h1>QREW Admin</h1>
+  <p>Provide admin key (from .env) to authenticate admin requests.</p>
+  <div class="small">
+    <label>Admin Key
+      <input id="adminKey" placeholder="x-admin-key value">
+    </label>
+
+    <label>Toggle Exclusive
+      <select id="toggleExclusive"><option value="true">Enabled</option><option value="false">Disabled</option></select>
+    </label>
+
+    <label>New Gate Password (leave empty to keep existing)
+      <input id="newPassword" placeholder="new password">
+    </label>
+
+    <label>Exclusive Products (JSON array)
+      <textarea id="productsJson" rows="6">[]</textarea>
+    </label>
+
+    <button id="saveBtn">Save Settings</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.addEventListener('click', async ()=>{
+      const key = document.getElementById('adminKey').value.trim();
+      if(!key){ alert('Admin key required'); return; }
+      const enabled = document.getElementById('toggleExclusive').value === 'true';
+      const password = document.getElementById('newPassword').value.trim();
+      let products = [];
+      try{ products = JSON.parse(document.getElementById('productsJson').value || '[]'); }catch(e){ alert('Products must be valid JSON array'); return; }
+      const body = { exclusiveEnabled: enabled, exclusiveProducts: products };
+      if(password) body.password = password;
+      const res = await fetch('/api/admin/settings', {method:'PUT', headers: {'Content-Type':'application/json','x-admin-key': key}, body: JSON.stringify(body)});
+      const j = await res.json();
+      if(res.ok) document.getElementById('status').textContent = 'Saved'; else document.getElementById('status').textContent = (j && j.error) ? j.error : 'error';
+    });
+
+    // fetch current settings
+    async function load(){
+      const key = document.getElementById('adminKey').value.trim();
+      if(!key) return;
+      const res = await fetch('/api/admin/settings',{headers:{'x-admin-key':key}});
+      if(res.ok){ const j = await res.json(); document.getElementById('toggleExclusive').value = j.exclusiveEnabled ? 'true':'false'; document.getElementById('productsJson').value = JSON.stringify(j.exclusiveProducts, null, 2); }
+    }
+    document.getElementById('adminKey').addEventListener('change', load);
+  </script>
+</body>
+</html>

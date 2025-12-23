@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QREW — Checkout</title>
+  <style>body{font-family:system-ui,Arial;background:#0b0b0c;color:#cfcfcf;padding:40px} .box{max-width:720px;margin:0 auto;background:#111;padding:20px;border-radius:8px}</style>
+</head>
+<body>
+  <div class="box">
+    <h1>Thank you</h1>
+    <p>Your checkout completed. If you were testing, this is a demo success page.</p>
+    <pre id="info"></pre>
+    <p><a href="index.html">Return to site</a></p>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    document.getElementById('info').textContent = 'session_id=' + params.get('session_id') + '\n' + 'canceled=' + params.get('canceled');
+  </script>
+</body>
+</html>

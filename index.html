@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QREW — System Portal Mock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">QREW // PORTAL</div>
+    <nav>
+      <ul>
+        <li data-tab="products" class="active">Products</li>
+        <li data-tab="members">Members Only</li>
+        <li data-tab="about">About — System Info</li>
+        <li data-tab="exclusive">QREW EXCLUSIVE</li>
+      </ul>
+    </nav>
+    <footer class="muted">
+      <div class="theme-controls" title="Theme">
+        <button class="theme-btn" data-theme="lavender">Lavender</button>
+        <button class="theme-btn" data-theme="brown">Brown</button>
+        <button class="theme-btn" data-theme="charcoal">Charcoal</button>
+      </div>
+      <div style="margin-top:8px;">Minimal • Utilitarian • Secure</div>
+    </footer>
+  </aside>
+
+  <main class="content">
+    <section id="products" class="tab active">
+      <h1>Products</h1>
+      <p class="muted">Public catalogue — framed as system listings.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">Model: CORE-01</div>
+          <div class="card-desc">Limited-run tee • Public preorder</div>
+          <button class="btn">Preorder</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Model: NODE-02</div>
+          <div class="card-desc">Accessory • In stock</div>
+          <button class="btn">View</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="members" class="tab">
+      <h1>Members Only</h1>
+      <p class="muted">Content for logged-in members (mock).</p>
+      <pre class="terminal">Username: <span class="cursor">_</span></pre>
+    </section>
+
+    <section id="about" class="tab">
+      <h1>About — System Info</h1>
+      <div class="sys">
+        <pre>
+  ▒▒▒ Q R E W  P O R T A L ▒▒▒
+  OS: QREW-SHIELD v1.0
+  Uptime: 00:12:34
+  Access Level: GUEST
+        </pre>
+      </div>
+    </section>
+
+    <section id="exclusive" class="tab">
+      <h1>QREW EXCLUSIVE</h1>
+      <p class="muted">Password-gated preorder area. Authenticate to unlock.</p>
+      <div class="gate">
+        <label class="terminal-label">> enter password</label>
+        <div class="terminal-input">
+          <input id="passwordInput" placeholder="terminal input" autocomplete="off" />
+          <button id="pwSubmit" class="btn small">enter</button>
+        </div>
+        <div id="pwFeedback" class="feedback muted"></div>
+        <div id="loader" class="loader hidden" aria-hidden="true" title="loading"></div>
+      </div>
+
+      <div id="exclusiveContent" class="exclusive hidden">
+        <h2>Access Granted — QREW EXCLUSIVE</h2>
+        <div class="cards">
+          <!-- dynamic content injected here -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="script.js"></script>
+</body>
+</html>
